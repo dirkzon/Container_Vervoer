@@ -5,7 +5,7 @@ namespace Containervervoer.Tests.Logic
 {
     public class ShipTests
     {
-        Ship ship = new Ship(2,2,3);
+        Ship ship = new Ship(2,2,5);
 
         public ShipTests()
         {
@@ -142,6 +142,56 @@ namespace Containervervoer.Tests.Logic
             var actual = ship.PrintShip();
             //Assert
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CheckIfShipHasEnoughWeight_ShouldHaveEnoughWeight()
+        {
+            //Arrange
+            for (int i = 0; i < 10; i++)
+            {
+                ship.LoadNormalContainer(new Container(30000, ContainerType.Normal));
+            }
+            //Act
+
+            //Assert
+            Assert.True(ship.CheckIfShipHasEnoughWeight());
+        }
+
+        [Fact]
+        public void CheckIfShipHasEnoughWeight_ShouldNotHaveEnoughWeight()
+        {
+            //Arrange
+            for (int i = 0; i < 2; i++)
+            {
+                ship.LoadNormalContainer(new Container(30000, ContainerType.Normal));
+            }
+            //Act
+
+            //Assert
+            Assert.False(ship.CheckIfShipHasEnoughWeight());
+        }
+
+        [Fact]
+        public void CheckIfShipIsBalanced_ShouldBeBalanced()
+        {
+            //Arrange
+            for (int i = 0; i < 2; i++)
+            {
+                ship.LoadNormalContainer(new Container(30000, ContainerType.Normal));
+            }
+            //Act
+            //Assert
+            Assert.True(ship.CheckIfShipIsBalanced());
+        }
+
+        [Fact]
+        public void CheckIfShipIsBalanced_ShouldNotBeBalanced()
+        {
+            //Arrange
+            //Act
+            //Assert
+            Assert.False(ship.CheckIfShipIsBalanced());
         }
     }
 }

@@ -78,14 +78,25 @@ namespace Containervervoer.Logic.Logic
                 }
             }
 
-
-            string output = ship.PrintShip();
-
-            var process = new ProcessStartInfo(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+            if (ship.CheckIfShipIsBalanced())
             {
-                Arguments = output
-            };
-            Process.Start(process);
+                if (ship.CheckIfShipHasEnoughWeight())
+                {
+                    var process = new ProcessStartInfo(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+                    {
+                        Arguments = ship.PrintShip()
+                    };
+                    Process.Start(process);
+                }
+                else
+                {
+                    Console.WriteLine("Ship does not have enough weight");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ship is out of balance");
+            }
         }
 
         private static void ShowError(Container c)

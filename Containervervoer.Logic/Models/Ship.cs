@@ -84,7 +84,6 @@ namespace Containervervoer.Logic
                 var rowsSortedByLightest = Rows.OrderBy(row => row.RowWeight);
                 return rowsSortedByLightest.Any(row => row.PlaceNonValuableContainer(container));
             }
-
             return false;
         }
 
@@ -98,6 +97,43 @@ namespace Containervervoer.Logic
             }
             return totalWeight;
         }
+
+        public bool CheckIfShipHasEnoughWeight()
+        {
+            int currentWeight = GetShipTotalWeight();
+            if (currentWeight >= MinWeight && currentWeight <= MaxWeight) return true;
+            return false;
+        }
+
+        public bool CheckIfShipIsBalanced()
+        {
+            int leftWeigth = 0;
+            int rightWeigth = 0;
+            foreach (var row in Rows)
+            {
+                leftWeigth += row.GetLeftWeight();
+                rightWeigth += row.GetRightWeight();
+            }
+            var percentage = GetWeigthDifference(leftWeigth, rightWeigth);
+            if (percentage > 20) return false;
+            return true;
+        }
+
+        private decimal GetWeigthDifference(int leftweigth, int rightweigth)
+        {
+            decimal difference = 0;
+            if (leftweigth > rightweigth)
+            {
+                difference = leftweigth - rightweigth;
+            }
+            else
+            {
+                difference = rightweigth - leftweigth;
+            }
+            decimal totalWeight = leftweigth + rightweigth;
+            return (difference / totalWeight) * 100;
+        }
+
 
         private string GetContainerPositionValues()
         {
@@ -152,8 +188,7 @@ namespace Containervervoer.Logic
         {
             string positions = GetContainerPositionValues();
             string weights = GetContainerWeightValues();
-            string url = $"https://i872272core.venus.fhict.nl/ContainerVisualizer/index.html?length={Length}&width={Width}&stacks={positions}&weights={weights}";
-            return url;
+            return $"https://i872272core.venus.fhict.nl/ContainerVisualizer/index.html?length={Length}&width={Width}&stacks={positions}&weights={weights}";
         }
     }
 }

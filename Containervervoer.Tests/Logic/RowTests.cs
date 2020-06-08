@@ -102,5 +102,31 @@ namespace Containervervoer.Tests
             //Assert
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void GetLeftWeight_ShouldReturnWeightOfLeftStacks()
+        {
+            //Arrange
+            var expected =58000;
+
+            //Act
+            var actual = row.GetLeftWeight();
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GetRightWeight_ShouldReturnWeightOfRightStacks()
+        {
+            //Arrange
+            var expected = 39000;
+
+            //Act
+            var actual = row.GetRightWeight();
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }

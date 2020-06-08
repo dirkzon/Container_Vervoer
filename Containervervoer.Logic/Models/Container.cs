@@ -17,11 +17,11 @@ namespace Containervervoer.Logic
             }
             else
             {
-                throw new ArgumentException("container kan niet boven de 4000 of onder 30000 wegen");
+                throw new ArgumentException("container can't weigh above 30000 or below 4000");
             }
         }
 
-        public int GetType()
+        public new int GetType()
         {
             return (int) Type;
         }

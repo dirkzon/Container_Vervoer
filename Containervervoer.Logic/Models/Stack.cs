@@ -28,39 +28,26 @@ namespace Containervervoer.Logic
 
         private void IncreaseHeightOfContainers()
         {
-            foreach (var container in Containers)
-            {
-                container.Height++;
-            }
+            foreach (var container in Containers)container.Height++;
         }
 
         public bool CheckIfWeightCanFit(Container container)
         {
             int weightOnFirstContainer = GetWeightOnFirstContainer();
-            if (weightOnFirstContainer + container.Weight <= 120000)
-            {
-                return true;
-            }
+            if (weightOnFirstContainer + container.Weight <= 120000) return true;
             return false;
         }
 
         private int GetWeightOnFirstContainer()
         {
             var firstContainer = Containers.Find(c => c.Height == 0);
-            if (firstContainer == null)
-            {
-                return 0;
-            }
+            if (firstContainer == null) return 0;
             return StackWeight - firstContainer.Weight;
         }
 
         public bool CheckIfHeightCanFit(int maxHeight)
         {
-            if (Containers.Count + 1 > maxHeight)
-            {
-                return false;
-            }
-
+            if (Containers.Count + 1 > maxHeight) return false;
             return true;
         }
 

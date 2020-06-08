@@ -32,9 +32,7 @@ namespace Containervervoer
                 var container = new Container(r.Next(4000, 30000), ContainerType.Cooled);
                 Containers.Add(container);
             }
-            ContainerDistributor.DistributeContainers(Containers, ship);
-
-            
+            ContainerDistributor.DistributeContainers(Containers, ship);     
         }
     }
 }

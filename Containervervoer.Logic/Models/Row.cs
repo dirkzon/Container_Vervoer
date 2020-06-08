@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Containervervoer.Logic
@@ -74,6 +75,30 @@ namespace Containervervoer.Logic
             }
 
             RowWeight = totalWeight;
+        }
+
+        public int GetLeftWeight()
+        {
+            var half = Math.Floor((decimal) Stacks.Count / 2);
+            var leftStacks = Stacks.Where(s => s.XPosition <= half);
+            return GetWeightOfStack(leftStacks);
+        }
+
+        public int GetRightWeight()
+        {
+            var half = Math.Ceiling((decimal)Stacks.Count / 2);
+            var rightStacks = Stacks.Where(s => s.XPosition > half);
+            return GetWeightOfStack(rightStacks);
+        }
+
+        private int GetWeightOfStack(IEnumerable<Stack> stacks)
+        {
+            int weight = 0;
+            foreach (var stack in stacks)
+            {
+                weight += stack.StackWeight;
+            }
+            return weight;
         }
 
         public string PrintStackPositions(int index)
