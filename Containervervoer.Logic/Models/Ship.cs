@@ -107,30 +107,30 @@ namespace Containervervoer.Logic
 
         public bool CheckIfShipIsBalanced()
         {
-            int leftWeigth = 0;
-            int rightWeigth = 0;
+            int leftWeight = 0;
+            int rightWeight = 0;
             foreach (var row in Rows)
             {
-                leftWeigth += row.GetLeftWeight();
-                rightWeigth += row.GetRightWeight();
+                leftWeight += row.GetLeftWeight();
+                rightWeight += row.GetRightWeight();
             }
-            var percentage = GetWeigthDifference(leftWeigth, rightWeigth);
+            var percentage = GetWeightDifference(leftWeight, rightWeight);
             if (percentage > 20) return false;
             return true;
         }
 
-        private decimal GetWeigthDifference(int leftweigth, int rightweigth)
+        private static decimal GetWeightDifference(int leftweight, int rightweight)
         {
-            decimal difference = 0;
-            if (leftweigth > rightweigth)
+            decimal difference;
+            if (leftweight > rightweight)
             {
-                difference = leftweigth - rightweigth;
+                difference = leftweight - rightweight;
             }
             else
             {
-                difference = rightweigth - leftweigth;
+                difference = rightweight - leftweight;
             }
-            decimal totalWeight = leftweigth + rightweigth;
+            decimal totalWeight = leftweight + rightweight;
             return (difference / totalWeight) * 100;
         }
 

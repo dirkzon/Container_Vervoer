@@ -46,36 +46,24 @@ namespace Containervervoer.Logic.Logic
                 return containerList.OrderBy(c => c.Weight).ToList();
             }
 
-            foreach (var container in cooledValuableContainers)
+            foreach (var container in cooledValuableContainers.Where(container => !ship.LoadCooledValuableContainer(container)))
             {
-                if (!ship.LoadCooledValuableContainer(container))
-                {
-                    ShowError(container);
-                }
+                ShowError(container);
             }
 
-            foreach (var container in valuableContainers)
+            foreach (var container in valuableContainers.Where(container => !ship.LoadValuableContainer(container)))
             {
-                if (!ship.LoadValuableContainer(container))
-                {
-                    ShowError(container);
-                }
+                ShowError(container);
             }
 
-            foreach (var container in cooledContainers)
+            foreach (var container in cooledContainers.Where(container => !ship.LoadCooledContainer(container)))
             {
-                if (!ship.LoadCooledContainer(container))
-                {
-                    ShowError(container);
-                }
+                ShowError(container);
             }
 
-            foreach (var container in normalContainers)
+            foreach (var container in normalContainers.Where(container => !ship.LoadNormalContainer(container)))
             {
-                if (!ship.LoadNormalContainer(container))
-                {
-                    ShowError(container);
-                }
+                ShowError(container);
             }
 
             if (ship.CheckIfShipIsBalanced())
