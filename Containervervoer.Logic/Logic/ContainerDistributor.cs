@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-
+using System.Linq;
 
 namespace Containervervoer.Logic.Logic
 {
@@ -84,11 +81,11 @@ namespace Containervervoer.Logic.Logic
 
             string output = ship.PrintShip();
 
-            var info = new ProcessStartInfo(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+            var process = new ProcessStartInfo(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
             {
                 Arguments = output
             };
-            Process.Start(info);
+            Process.Start(process);
         }
 
         private static void ShowError(Container c)

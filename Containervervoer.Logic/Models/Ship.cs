@@ -88,12 +88,6 @@ namespace Containervervoer.Logic
             return false;
         }
 
-        public bool CheckShipWeight()
-        {
-            int currentWeight = GetShipTotalWeight();
-            if (currentWeight >= MinWeight && currentWeight <= MaxWeight) return true;
-            return false;
-        }
 
         public int GetShipTotalWeight()
         {
