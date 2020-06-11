@@ -119,7 +119,7 @@ namespace Containervervoer.Logic
             return true;
         }
 
-        private static decimal GetWeightDifference(int leftweight, int rightweight)
+        private decimal GetWeightDifference(int leftweight, int rightweight)
         {
             decimal difference;
             if (leftweight > rightweight)
