@@ -9,7 +9,11 @@ namespace Containervervoer
     {
         static void Main(string[] args)
         {
-            var ship = new Ship(6,8, 6);
+            Console.WriteLine("Ship width,length,height");
+            string result = Console.ReadLine();
+            string[] values = result.Split(",");
+
+            var ship = new Ship(Convert.ToInt32(values[0]), Convert.ToInt32(values[0]), Convert.ToInt32(values[0]));
             Random r = new Random();
             var Containers = new List<Container>();
             for (int i = 0; i < 5; i++)
