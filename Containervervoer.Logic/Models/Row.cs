@@ -20,6 +20,7 @@ namespace Containervervoer.Logic
             CreateStacks(length);
         }
 
+        //maakt aan de hand van de breete van het schip de stacks aan
         private void CreateStacks(int width)
         {
             for (var i = 0; i < width; i++)
@@ -28,11 +29,13 @@ namespace Containervervoer.Logic
             }
         }
 
+        //sorteerd alle stacks in de row op gewicht van lichtste naar zwaarste
         public IEnumerable<Stack> GetStacksByWeight()
         {
             return Stacks.OrderBy(stack => stack.StackWeight);
         }
 
+        //probeert een niet waardevolle container te plaatsen
         public bool PlaceNonValuableContainer(Container container)
         {
             var sortedStacks = GetStacksByWeight();
@@ -49,6 +52,7 @@ namespace Containervervoer.Logic
             return false;
         }
 
+        //probeert een waardevolle container te plaatsen
         public bool PlaceValuableContainer(Container container)
         {
             var sortedStacks = GetStacksByWeight();
@@ -66,6 +70,7 @@ namespace Containervervoer.Logic
             return false;
         }
 
+        //berekent het nieuwe gewicht van de row
         private void UpdateWeight()
         {
             int totalWeight = 0;
@@ -77,12 +82,15 @@ namespace Containervervoer.Logic
             RowWeight = totalWeight;
         }
 
+        //berekent het gewicht van alle stacks aan de linker kant van de row
         public int GetLeftWeight()
         {
             var half = Math.Floor((decimal) Stacks.Count / 2);
             var leftStacks = Stacks.Where(s => s.XPosition <= half);
             return GetWeightOfStack(leftStacks);
         }
+
+        //berekent het gewicht van alle stacks aan de rechter kant van de row
 
         public int GetRightWeight()
         {
@@ -91,6 +99,7 @@ namespace Containervervoer.Logic
             return GetWeightOfStack(rightStacks);
         }
 
+        //berekent het totale gewicht van een lijst van stacks
         private int GetWeightOfStack(IEnumerable<Stack> stacks)
         {
             int weight = 0;
@@ -101,6 +110,7 @@ namespace Containervervoer.Logic
             return weight;
         }
 
+        //print de posities van de container in een stack aan de hand van een positie
         public string PrintStackPositions(int index)
         {
             if (index > Stacks.Count || index < 0)
@@ -110,6 +120,7 @@ namespace Containervervoer.Logic
             return Stacks[index].PrintStackPositions();
         }
 
+        //print de gewichten van de container in een stack aan de hand van een positie
         public string PrintStackWeights(int index)
         {
             if (index > Stacks.Count || index < 0)

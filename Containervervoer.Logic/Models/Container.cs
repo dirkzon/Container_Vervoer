@@ -21,11 +21,13 @@ namespace Containervervoer.Logic
             }
         }
 
+        //geeft het type van de container
         public new int GetType()
         {
             return (int) Type;
         }
 
+        //geeft het gewicht van de container
         public int GetWeight()
         {
             return Weight / 1000;

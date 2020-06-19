@@ -9,6 +9,7 @@ namespace Containervervoer.Logic.Logic
     {
         public static void DistributeContainers(List<Container> containers, Ship ship)
         {
+            //alle containers verdelen op type
 
             var cooledContainers = new List<Container>();    
             var valuableContainers = new List<Container>();
@@ -36,6 +37,8 @@ namespace Containervervoer.Logic.Logic
                 }
             }
 
+            //de container lijsten sorteren van laagste naar hoogste op gewicht
+
             cooledContainers = OrderContainersByWeight(cooledContainers);
             valuableContainers = OrderContainersByWeight(valuableContainers);
             cooledValuableContainers = OrderContainersByWeight(cooledValuableContainers);
@@ -45,6 +48,8 @@ namespace Containervervoer.Logic.Logic
             {
                 return containerList.OrderBy(c => c.Weight).ToList();
             }
+
+            //voor alle container lijsten proberen de containers te plaatsen op het schip
 
             foreach (var container in cooledValuableContainers.Where(container => !ship.LoadCooledValuableContainer(container)))
             {
@@ -66,9 +71,11 @@ namespace Containervervoer.Logic.Logic
                 ShowError(container);
             }
 
-            if (ship.CheckIfShipIsBalanced())
+            //checks om te kijken of het schip genoeg gewicht heeft en of het schip in balans is
+
+            if (ship.CheckIfShipHasEnoughWeight())
             {
-                if (ship.CheckIfShipHasEnoughWeight())
+                if (ship.CheckIfShipIsBalanced())
                 {
                     var process = new ProcessStartInfo(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
                     {
@@ -78,14 +85,16 @@ namespace Containervervoer.Logic.Logic
                 }
                 else
                 {
-                    Console.WriteLine("Ship does not have enough weight");
+                    Console.WriteLine("Ship is out of balance");
                 }
             }
             else
             {
-                Console.WriteLine("Ship is out of balance");
+                Console.WriteLine("Ship does not have enough weight");
             }
         }
+
+        //laat een error zien dat een bepaalde container niet geplaatst kan worden
 
         private static void ShowError(Container c)
         {

@@ -23,6 +23,8 @@ namespace Containervervoer.Logic
             CreateRows(length, width, height);
         }
 
+        //aan de hand van de lengte en breedte rijen aanmaken
+
         public void CreateRows(int length, int width, int height)
         {
             for (int i = 0; i < length; i++)
@@ -44,6 +46,7 @@ namespace Containervervoer.Logic
             }
         }
 
+        //proberen om een gekoelde container te plaatsen in de lichtste rij
         public bool LoadCooledContainer(Container container)
         {
             if (container.Type == ContainerType.Cooled)
@@ -55,6 +58,7 @@ namespace Containervervoer.Logic
             return false;
         }
 
+        //proberen om een gekoelde en waardevolle container te plaatsen in de lichtste rij
         public bool LoadCooledValuableContainer(Container container)
         {
             if (container.Type == ContainerType.ValuableAndCooled)
@@ -66,6 +70,7 @@ namespace Containervervoer.Logic
             return false;
         }
 
+        //proberen om een waardevolle container te plaatsen in de lichtste rij
         public bool LoadValuableContainer(Container container)
         {
             if (container.Type == ContainerType.Valuable)
@@ -77,6 +82,7 @@ namespace Containervervoer.Logic
             return false;
         }
 
+        //proberen om een normale container te plaatsen in de lichtste rij
         public bool LoadNormalContainer(Container container)
         {
             if (container.Type == ContainerType.Normal)
@@ -87,7 +93,7 @@ namespace Containervervoer.Logic
             return false;
         }
 
-
+        //berekent het totale gewicht van het schip
         public int GetShipTotalWeight()
         {
             int totalWeight = 0;
@@ -98,6 +104,7 @@ namespace Containervervoer.Logic
             return totalWeight;
         }
 
+        //check om te kijken of het schip genoeg gewicht heeft
         public bool CheckIfShipHasEnoughWeight()
         {
             int currentWeight = GetShipTotalWeight();
@@ -105,6 +112,7 @@ namespace Containervervoer.Logic
             return false;
         }
 
+        //check om te kijken of het schip in balans is
         public bool CheckIfShipIsBalanced()
         {
             int leftWeight = 0;
@@ -119,6 +127,7 @@ namespace Containervervoer.Logic
             return true;
         }
 
+        //berekent het verschil van gewicht in percentages van de linker en rechter kant
         private static decimal GetWeightDifference(int leftweight, int rightweight)
         {
             decimal difference;
@@ -134,7 +143,7 @@ namespace Containervervoer.Logic
             return (difference / totalWeight) * 100;
         }
 
-
+        //print de posities van de containers in het schip
         private string GetContainerPositionValues()
         {
             string output = string.Empty;
@@ -159,6 +168,8 @@ namespace Containervervoer.Logic
 
             return output;
         }
+
+        //print de gewichten van de containers in het schip
         private string GetContainerWeightValues()
         {
             string output = string.Empty;
@@ -184,6 +195,7 @@ namespace Containervervoer.Logic
             return output;
         }
 
+        //voegt de posities en gewichten van de containers in het schip samen in een url
         public string PrintShip()
         {
             string positions = GetContainerPositionValues();
