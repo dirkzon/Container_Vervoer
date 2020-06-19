@@ -127,7 +127,6 @@ namespace Containervervoer.Logic
             return true;
         }
 
-        //berekent het verschil van gewicht in percentages van de linker en rechter kant
         private static decimal GetWeightDifference(int leftweight, int rightweight)
         {
             decimal difference;
